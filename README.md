@@ -29,7 +29,7 @@ Youtube or something. It makes testing easier.
 
 ### 2. Run playerctl
 Make sure your playerctl is running and working
-```
+```bash
 playerctl status --format "{{ uc(status) }}"
 playerctl metadata artist
 playerctl metadata title
@@ -38,7 +38,7 @@ playerctl metadata title
 ### 3. Configure `cava`
 
 Make sure your `~/.config/cava/config` contains these **exact settings**:
-```
+```ini
 method = raw
 data_format = ascii
 ascii_max_range = 8
@@ -54,7 +54,7 @@ Create a systemd user service at:
 ```~/.config/systemd/user/cava-to-file.service```
 
 Paste the following content (adjust paths):
-```
+```ini
 [Unit]
 Description=CAVA to RAM file for Hyprlock visualizer
 After=default.target
@@ -68,19 +68,19 @@ WantedBy=default.target
 ```
 
 RUN the following commands
-```
+```bash
 systemctl --user daemon-reexec
 systemctl --user daemon-reload
 systemctl --user enable --now cava-to-file.service
 systemctl --user start --now cava-to-file.service
 ```
 Check if service is running
-```
+```bash
 systemctl --user status --now cava-to-file.service
 journalctl --user -u cava-to-file -f
 ```
 check if outputfile is getting data
-```
+```bash
 tail -f  /dev/shm/cava_output.txt
 ```
 
