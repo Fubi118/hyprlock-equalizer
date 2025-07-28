@@ -24,32 +24,37 @@ You will need the following tools:
 
 ## 🛠️ Setup Instructions
 
-### 1. Start Music (youtube or something)
-It makes testing easier
+### 1. Start Music
+Youtube or something. It makes testing easier.
 
 ### 2. Run playerctl
 Make sure your playerctl is running and working
+```
 playerctl status --format "{{ uc(status) }}"
 playerctl metadata artist
 playerctl metadata title
+```
 
 ### 3. Configure `cava`
 
 Make sure your `~/.config/cava/config` contains these **exact settings**:
-
+```
 method = raw
 data_format = ascii
 ascii_max_range = 8
-framerate = 30
-
+```
 These settings are required to ensure the visualizer generates the expected output for the script to parse.
-you can find an example config under "examples"
+you can find an example config here -> `examples/cava_config`.
 
-### 4. Enable the background service
+### 4. place scripts
+Move the scripts `cava_to_file.sh`,`eq.sh` and `eq_inverted.sh` in your`~.config/hypr/scripts` folder.
+
+### 5. Enable the background service
 Create a systemd user service at:
-~/.config/systemd/user/cava-to-file.service
+```~/.config/systemd/user/cava-to-file.service```
 
 Paste the following content (adjust paths):
+```
 [Unit]
 Description=CAVA to RAM file for Hyprlock visualizer
 After=default.target
@@ -60,29 +65,36 @@ Restart=always
 
 [Install]
 WantedBy=default.target
+```
 
-RUN
+RUN the following commands
+```
 systemctl --user daemon-reexec
 systemctl --user daemon-reload
 systemctl --user enable --now cava-to-file.service
 systemctl --user start --now cava-to-file.service
-
+```
 Check if service is running
+```
 systemctl --user status --now cava-to-file.service
 journalctl --user -u cava-to-file -f
-
+```
 check if outputfile is getting data
+```
 tail -f  /dev/shm/cava_output.txt
+```
 
-### 5. Add the Hyprlock config snippet
-In your hyprlock.conf, add the two label blocks for top and bottom visualization from equalizer_snippet.conf. Adjust the positions as needed.
+### 6. Add the Hyprlock config snippet
+In your hyprlock.conf, add the two label blocks for top and bottom visualization from `snippets/equalizer_snippets.conf`. Adjust the positions as needed.
 If you only need one you can do so.
+
+I added two complete Hyprlock configs as examples `examples/hyprlock.conf`, `examples/hyprlock_var2.conf`.
 
 ## 🧠 How It Works
 - cava_to_file.sh: continuously pipes the CAVA visual data into a file stored in RAM (/dev/shm/cava_output.txt)
 - eq.sh and eq_inverted.sh: parse this file and map amplitude to Unicode characters (Braille elements)
 - playerctl: checks if something is playing and hides the visualizer otherwise
-- Hyprlock: regularly calls the script via cmd[update:1]
+- Hyprlock: regularly calls the script via `cmd[update:1]`
 
 ## 🎨 Customization
 ### Changing the Visualizer Bars
@@ -90,8 +102,8 @@ If you only need one you can do so.
 The visualizer bars are defined in the scripts (`eq.sh` and `eq_inverted.sh`) by mapping numeric amplitude values to Unicode characters.
 
 - To **change the appearance** of the bars, edit the character arrays inside these scripts.  
-  see examples/eq_variations.txt for some ideas. be creative and replace these characters with others (e.g., different block elements, Braille patterns, or custom Unicode symbols).
+  see `examples/eq_variations.txt` for some ideas. be creative and replace these characters with others (e.g., different block elements, Braille patterns, or custom Unicode symbols).
 
 ### Adjusting the Number of Bars
-The number of bars are set like this "bars = 20"
+The number of bars are set like this `bars = 20`. See `examples/cava_config`
 you can easily change the amount without breaking anything.
