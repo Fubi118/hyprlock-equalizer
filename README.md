@@ -92,7 +92,7 @@ tail -f  /dev/shm/cava_output.txt
 
 ### 6. Add the Hyprlock config snippet
 In your hyprlock.conf, add the two label blocks for the top and bottom equalizer visualization from `snippets/equalizer_snippets.conf`.
-To show the current track info (artist & title), also include the snippet from `snippets/now_playing_snippets.conf`.
+To show the current track info (artist & title), also include the snippet from `snippets/now_playing_snippet.conf`.
 
 Make sure to adjust the position values as needed to match your layout.
 
