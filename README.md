@@ -3,6 +3,11 @@
 This project adds a clean, performant audio visualizer to your [Hyprlock](https://github.com/hyprwm/hyprlock) lockscreen using [CAVA](https://github.com/karlstav/cava) and a custom `eq.sh` script.  
 It is designed to be subtle, fast, and entirely written in bash — with no heavy dependencies.
 
+![Preview](equalizer_demo1.gif)
+
+![Preview](equalizer_demo2.gif)
+
+
 ## ✨ Features
 
 - Live audio visualization with 8 levels of Unicode blocks
