@@ -15,6 +15,7 @@ It is designed to be subtle, fast, and entirely written in bash — with no heav
 - RAM-based output
 - Auto-start via systemd user service
 - Player detection via `playerctl`
+- Now Playing display (Artist & Title)
 
 ---
 
@@ -52,7 +53,7 @@ These settings are required to ensure the visualizer generates the expected outp
 you can find an example config here -> `examples/cava_config`.
 
 ### 4. place scripts
-Move the scripts `cava_to_file.sh`,`eq.sh` and `eq_inverted.sh` in your`~.config/hypr/scripts` folder.
+Move the scripts `cava_to_file.sh`,`eq.sh`, `eq_inverted.sh` and `nowplaying.sh` in your`~.config/hypr/scripts` folder.
 
 ### 5. Enable the background service
 Create a systemd user service at:
@@ -90,16 +91,21 @@ tail -f  /dev/shm/cava_output.txt
 ```
 
 ### 6. Add the Hyprlock config snippet
-In your hyprlock.conf, add the two label blocks for top and bottom visualization from `snippets/equalizer_snippets.conf`. Adjust the positions as needed.
-If you only need one you can do so.
+In your hyprlock.conf, add the two label blocks for the top and bottom equalizer visualization from `snippets/equalizer_snippets.conf`.
+To show the current track info (artist & title), also include the snippet from `snippets/now_playing_snippets.conf`.
 
-I added two complete Hyprlock configs as examples `examples/hyprlock.conf`, `examples/hyprlock_var2.conf`.
+Make sure to adjust the position values as needed to match your layout.
+
+For reference, two complete example configurations are included:
+- `examples/hyprlock.conf`
+- `examples/hyprlock_var2.conf`
 
 ## 🧠 How It Works
 - cava_to_file.sh: continuously pipes the CAVA visual data into a file stored in RAM (/dev/shm/cava_output.txt)
 - eq.sh and eq_inverted.sh: parse this file and map amplitude to Unicode characters (Braille elements)
 - playerctl: checks if something is playing and hides the visualizer otherwise
 - Hyprlock: regularly calls the script via `cmd[update:1]`
+- nowplaying.sh fetches artist and track title using playerctl
 
 ## 🎨 Customization
 ### Changing the Visualizer Bars
