@@ -25,7 +25,7 @@ You will need the following tools:
 
 - [`cava`](https://github.com/karlstav/cava) (audio visualizer backend)
 - [`playerctl`](https://github.com/altdesktop/playerctl) (media player detection)
-- **MesloLGL Nerd Font** (recommended font for correct visualizer rendering)
+- MesloLGL Nerd Font (recommended font for correct visualizer rendering)
 
 ---
 
@@ -100,7 +100,7 @@ Make sure to adjust the position values as needed to match your layout.
 It is recommended to explicitly set a known and installed monospace font in your Hyprlock configuration to ensure consistent rendering of the visualizer.
 
 Recommended font:
-- **MesloLGL Nerd Font**
+- MesloLGL Nerd Font
 
 Using a different or partially incompatible font may affect how Unicode block or Braille characters are rendered. If visual artifacts occur, refer to the **Known Issues** section.
 
@@ -141,7 +141,7 @@ This is not a bug in the scripts, but a font rendering limitation.
 
 If you experience visual issues:
 
-- Try switching to a different font (recommended: **MesloLGL Nerd Font**)
+- Try switching to a different font (recommended: MesloLGL Nerd Font)
 - If the issue persists, switch to the full block-based visualizer layout
 
 The full block-based variants can be found in `examples/eq_variations.txt`
