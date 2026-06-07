@@ -25,6 +25,7 @@ You will need the following tools:
 
 - [`cava`](https://github.com/karlstav/cava) (audio visualizer backend)
 - [`playerctl`](https://github.com/altdesktop/playerctl) (media player detection)
+- **MesloLGL Nerd Font** (recommended font for correct visualizer rendering)
 
 ---
 
@@ -96,6 +97,13 @@ To show the current track info (artist & title), also include the snippet from `
 
 Make sure to adjust the position values as needed to match your layout.
 
+It is recommended to explicitly set a known and installed monospace font in your Hyprlock configuration to ensure consistent rendering of the visualizer.
+
+Recommended font:
+- **MesloLGL Nerd Font**
+
+Using a different or partially incompatible font may affect how Unicode block or Braille characters are rendered. If visual artifacts occur, refer to the **Known Issues** section.
+
 For reference, two complete example configurations are included:
 - `examples/hyprlock.conf`
 - `examples/hyprlock_var2.conf`
@@ -118,3 +126,22 @@ The visualizer bars are defined in the scripts (`eq.sh` and `eq_inverted.sh`) by
 ### Adjusting the Number of Bars
 The number of bars are set like this `bars = 20`. See `examples/cava_config`
 you can easily change the amount without breaking anything.
+
+## ⚠️ Known Issues
+
+### Braille Rendering Differences
+
+The visualizer uses Unicode Braille characters in some configurations to represent audio levels.
+
+Depending on the font used, these characters may be rendered differently. In some cases, this can lead to unwanted visual artifacts such as visible “empty dots” or inconsistent block shapes in the equalizer.
+
+This is not a bug in the scripts, but a font rendering limitation.
+
+### Recommended Fixes
+
+If you experience visual issues:
+
+- Try switching to a different font (recommended: **MesloLGL Nerd Font**)
+- If the issue persists, switch to the full block-based visualizer layout
+
+The full block-based variants can be found in `examples/eq_variations.txt`
